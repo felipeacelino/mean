@@ -14,3 +14,6 @@ server.use(bodyParser.json())
 
 // Inicializa o servidor
 server.listen(port, () => console.log(`BACKEND is running on port ${port}.`))
+
+// Exporta o módulo
+module.exports = server

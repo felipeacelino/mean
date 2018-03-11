@@ -10,5 +10,19 @@ BillingCycle.updateOptions({
     runValidators: true    // Habilita as validações pro 'update'
 })
 
+// Define uma nova rota que retorna a quantidade de registros
+BillingCycle.route('count', (req, res, next) => {
+    BillingCycle.count((error, value) => {
+        // Realiza um tratamento de erros para que os mesmos sejam retornados de forma mais padronizada
+        if (error) {
+            res.status(500).json({ errors: [error] })
+        } 
+        // Retorna o valor de 'count'
+        else {
+            res.json({ value })
+        }  
+    })
+})
+
 // Exporta o módulo
 module.exports = BillingCycle

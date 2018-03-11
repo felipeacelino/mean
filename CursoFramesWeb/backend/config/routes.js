@@ -12,8 +12,12 @@ module.exports = function(server) {
 
     // Importa o service 'billingCycleService'
     const billingCycleService = require('../api/billingCycle/billingCycleService')
-
     // Registra a rota so serviço 'billingCycleService'
     billingCycleService.register(router, '/billingCycles')
+
+    // Importa o service 'billingSummaryService'
+    const billingSummaryService = require('../api/billingSummary/billingSummaryService')
+    // Realiza o mapeamento da rota 
+    router.route('/billingSummary').get(billingSummaryService.getSummary)   
 
 }

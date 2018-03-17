@@ -1,6 +1,6 @@
 // Cria o component do 'valueBox'
 angular.module('primeiraApp').component('valueBox', {
-    bidings: {
+    bindings: {
         grid: '@',
         colorClass: '@',
         value: '@',

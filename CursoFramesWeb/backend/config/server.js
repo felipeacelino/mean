@@ -8,6 +8,8 @@ const express = require('express')
 const server = express()
 // Define as configurações de CORS
 const allowCors = require('./cors')
+// Define o 'express-query-int'
+const queryParser = require('express-query-int')
 
 // Adiona o 'bodyParser.urlencoded' para todas requisições vindas de formulários
 server.use(bodyParser.urlencoded({ extended: true }))
@@ -15,6 +17,8 @@ server.use(bodyParser.urlencoded({ extended: true }))
 server.use(bodyParser.json())
 // Adiona o 'CORS' para todas requisições
 server.use(allowCors)
+// Usado para converter strings da url para int
+server.use(queryParser())
 
 // Inicializa o servidor
 server.listen(port, () => console.log(`BACKEND is running on port ${port}.`))

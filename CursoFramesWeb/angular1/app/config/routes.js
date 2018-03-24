@@ -12,7 +12,7 @@ angular.module('primeiraApp').config([
         })
         // Estado do 'Ciclo de pagamentos'
         .state('billingCycle', {
-            url: '/billingCycles',
+            url: '/billingCycles?page',
             templateUrl: 'billingCycle/tabs.html'
         })
 

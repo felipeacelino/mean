@@ -1,4 +1,4 @@
-// Cria um filtro para controlar quais 'páginas' serão protegidas por autenticação
+// Cria um filtro para controlar a autenticação das páginas
 const jwt = require('jsonwebtoken')
 const env = require('../.env')
 

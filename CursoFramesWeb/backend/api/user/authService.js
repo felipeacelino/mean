@@ -83,3 +83,5 @@ const signup = (req, res, next) => {
     })
 }
 
+// Exporta o módulo
+module.exports = { login, signup, validateToken }

@@ -1,23 +1,33 @@
 // Carrega o 'Express'
 const express = require('express')
+const auth = require('./auth')
 
 // Exporta o módulo
 module.exports = function(server) {
-    
-    // API Routes
-    const router = express.Router()
 
-    // Passa o 'router' para o server
-    server.use('/api', router)
+    // ROTAS ABERTAS (NÃO PRECISAM DE AUTENTICAÇÃO)
+    const openApi = express.Router()
+    server.use('/oapi', openApi)
+
+    const AuthService = require('../api/user/authService')
+    openApi.post('/login', AuthService.login)
+    openApi.post('/signup', AuthService.signup)
+    openApi.post('/validateToken', AuthService.validateToken)
+
+    // ROTAS PROTEGIDAS POR TOKEN
+    const protectedApi = express.Router()
+    server.use('/api', protectedApi)
+
+    protectedApi.use(auth)
 
     // Importa o service 'billingCycleService'
     const billingCycleService = require('../api/billingCycle/billingCycleService')
     // Registra a rota so serviço 'billingCycleService'
-    billingCycleService.register(router, '/billingCycles')
+    billingCycleService.register(protectedApi, '/billingCycles')
 
     // Importa o service 'billingSummaryService'
     const billingSummaryService = require('../api/billingSummary/billingSummaryService')
     // Realiza o mapeamento da rota 
-    router.route('/billingSummary').get(billingSummaryService.getSummary)   
+    protectedApi.route('/billingSummary').get(billingSummaryService.getSummary)
 
 }

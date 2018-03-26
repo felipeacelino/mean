@@ -17,7 +17,7 @@
         }
 
         vm.signup = () => {
-            console.log(`Signup... ${vm.user.email}`)
+            console.log(`Cadastrando... ${vm.user.email}`)
         }
 
         vm.getUser = () => ({

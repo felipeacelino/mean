@@ -18,7 +18,7 @@
         }
 
         vm.signup = () => {
-            auth.signup(vm.user, err => err ? msgs.addError(err) : msgs.addSuccess('Sucesso!'))
+            auth.signup(vm.user, err => err ? msgs.addError(err) : $location.path('/'))
         }
 
         vm.getUser = () => auth.getUser()

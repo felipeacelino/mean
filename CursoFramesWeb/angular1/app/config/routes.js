@@ -17,7 +17,7 @@ angular.module('primeiraApp').config([
         })
 
         // Estado padrão
-        $urlRouterProvider.otherwise('/dashboard')
+        //$urlRouterProvider.otherwise('/dashboard')
     }
 ])
 .run([
@@ -38,9 +38,15 @@ angular.module('primeiraApp').config([
             if (!user && !isAuthPage) {
                 $window.location.href = authPage
             } else if (user && !user.isValid) {
-                user.isValid = true
-                $http.defaults.headers.common.Authorization = user.token
-                isAuthPage ? $window.location.href = '/' : $location.path('/dashboard')
+                auth.validateToken(user.token, (err, valid) => {
+                    if (!valid) {
+                        $window.location.href = authPage
+                    } else {
+                        user.isValid = true
+                        $http.defaults.headers.common.Authorization = user.token
+                        isAuthPage ? $window.location.href = '/' : $location.path('/dashboard')
+                    }
+                })
             }
         }        
     }

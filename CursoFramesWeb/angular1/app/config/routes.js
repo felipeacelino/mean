@@ -1,9 +1,8 @@
 angular.module('primeiraApp').config([
-
     '$stateProvider',
     '$urlRouterProvider',
-
-    function($stateProvider, $urlRouterProvider) {
+    '$httpProvider',
+    function($stateProvider, $urlRouterProvider, $httpProvider) {
         $stateProvider
         // Estado do 'dashboard'
         .state('dashboard', {
@@ -18,6 +17,7 @@ angular.module('primeiraApp').config([
 
         // Estado padrão
         //$urlRouterProvider.otherwise('/dashboard')
+        $httpProvider.interceptors.push('handleResponseError')
     }
 ])
 .run([

@@ -2,10 +2,11 @@
     angular.module('primeiraApp').controller('AuthCtrl', [
         '$location',
         'msgs',
+        'auth',
         AuthController
     ])
 
-    function AuthController($location, msgs) {
+    function AuthController($location, msgs, auth) {
         const vm = this
 
         vm.loginMode = true
@@ -13,20 +14,17 @@
         vm.changeMode = () => vm.loginMode = !vm.loginMode
 
         vm.login = () => {
-            console.log(`Login... ${vm.user.email}`)
+            auth.login(vm.user, err => err ? msgs.addError(err) :  msgs.addSuccess('Sucesso!'))
         }
 
         vm.signup = () => {
-            console.log(`Cadastrando... ${vm.user.email}`)
+            auth.signup(vm.user, err => err ? msgs.addError(err) : msgs.addSuccess('Sucesso!'))
         }
 
-        vm.getUser = () => ({
-            name: 'Felipe Acelino',
-            email: 'felipeacelino@hotmail.com'
-        })
+        vm.getUser = () => auth.getUser()
 
         vm.logout = () => {
-            console.log('Logout...')
+            auth.logout(() => msgs.addSuccess('Sucesso!'))
         }
     }
 })()
